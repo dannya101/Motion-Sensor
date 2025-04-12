@@ -4,7 +4,7 @@ from datetime import datetime
 import time
 
 pir = MotionSensor(4) 
-API_URL = "http://192.168.0.183:8000/motion"  # IP
+API_URL = "http://192.168.0.183:8000/motion"  # IP Address
 
 def send_motion_event():
     timestamp = datetime.now().isoformat()
