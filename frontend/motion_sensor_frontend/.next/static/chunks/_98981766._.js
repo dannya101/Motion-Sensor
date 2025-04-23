@@ -195,6 +195,7 @@ var { g: global, __dirname, k: __turbopack_refresh__, m: module } = __turbopack_
 __turbopack_context__.s({
     "default": (()=>OccupancyStatus)
 });
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/build/polyfills/process.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/jsx-dev-runtime.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/compiled/react/index.js [app-client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ui/badge.tsx [app-client] (ecmascript)");
@@ -208,6 +209,8 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 ;
+// Use environment variable or fallback to localhost for development
+const BACKEND_URL = ("TURBOPACK compile-time value", "http://localhost:5000") || "http://localhost:5000";
 function OccupancyStatus() {
     _s();
     const [isOccupied, setIsOccupied] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);
@@ -218,15 +221,23 @@ function OccupancyStatus() {
             const checkMotion = {
                 "OccupancyStatus.useEffect.checkMotion": async ()=>{
                     try {
-                        const response = await fetch("http://172.20.10.5:5000/motion");
+                        const response = await fetch(`${BACKEND_URL}/motion`, {
+                            method: 'GET',
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
                         if (!response.ok) {
-                            throw new Error("Failed to fetch motion data");
+                            throw new Error(`HTTP error! status: ${response.status}`);
                         }
                         const data = await response.json();
                         setIsOccupied(data.motion);
                         setLoading(false);
+                        setError(null) // Clear any previous errors
+                        ;
                     } catch (err) {
-                        setError("Could not connect to motion sensor");
+                        const errorMessage = err instanceof Error ? err.message : "Could not connect to motion sensor";
+                        setError(errorMessage);
                         setLoading(false);
                         console.error("Error fetching motion data:", err);
                     }
@@ -256,14 +267,14 @@ function OccupancyStatus() {
                             children: "Connecting..."
                         }, void 0, false, {
                             fileName: "[project]/components/occupancy-status.tsx",
-                            lineNumber: 48,
+                            lineNumber: 58,
                             columnNumber: 13
                         }, this) : error ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
                             variant: "destructive",
                             children: "Error"
                         }, void 0, false, {
                             fileName: "[project]/components/occupancy-status.tsx",
-                            lineNumber: 52,
+                            lineNumber: 62,
                             columnNumber: 13
                         }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$badge$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["Badge"], {
                             variant: isOccupied ? "destructive" : "success",
@@ -271,18 +282,18 @@ function OccupancyStatus() {
                             children: isOccupied ? "Occupied" : "Available"
                         }, void 0, false, {
                             fileName: "[project]/components/occupancy-status.tsx",
-                            lineNumber: 54,
+                            lineNumber: 64,
                             columnNumber: 13
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/occupancy-status.tsx",
-                    lineNumber: 45,
+                    lineNumber: 55,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/occupancy-status.tsx",
-                lineNumber: 44,
+                lineNumber: 54,
                 columnNumber: 7
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ui$2f$card$2e$tsx__$5b$app$2d$client$5d$__$28$ecmascript$29$__["CardContent"], {
@@ -300,19 +311,19 @@ function OccupancyStatus() {
                                     className: "h-16 w-16 text-gray-400 animate-pulse"
                                 }, void 0, false, {
                                     fileName: "[project]/components/occupancy-status.tsx",
-                                    lineNumber: 70,
+                                    lineNumber: 80,
                                     columnNumber: 15
                                 }, this) : error ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$square$2d$activity$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__ActivitySquare$3e$__["ActivitySquare"], {
                                     className: "h-16 w-16 text-red-500"
                                 }, void 0, false, {
                                     fileName: "[project]/components/occupancy-status.tsx",
-                                    lineNumber: 72,
+                                    lineNumber: 82,
                                     columnNumber: 15
                                 }, this) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$lucide$2d$react$2f$dist$2f$esm$2f$icons$2f$move$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__MoveIcon$3e$__["MoveIcon"], {
                                     className: `h-16 w-16 ${isOccupied ? "text-red-500" : "text-green-500"}`
                                 }, void 0, false, {
                                     fileName: "[project]/components/occupancy-status.tsx",
-                                    lineNumber: 74,
+                                    lineNumber: 84,
                                     columnNumber: 15
                                 }, this),
                                 isOccupied && !loading && !error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -322,51 +333,51 @@ function OccupancyStatus() {
                                             className: "animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"
                                         }, void 0, false, {
                                             fileName: "[project]/components/occupancy-status.tsx",
-                                            lineNumber: 78,
+                                            lineNumber: 88,
                                             columnNumber: 17
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                                             className: "relative inline-flex rounded-full h-5 w-5 bg-red-500"
                                         }, void 0, false, {
                                             fileName: "[project]/components/occupancy-status.tsx",
-                                            lineNumber: 79,
+                                            lineNumber: 89,
                                             columnNumber: 17
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/occupancy-status.tsx",
-                                    lineNumber: 77,
+                                    lineNumber: 87,
                                     columnNumber: 15
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/occupancy-status.tsx",
-                            lineNumber: 62,
+                            lineNumber: 72,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                             className: "text-center text-muted-foreground",
-                            children: loading ? "Connecting to motion sensor..." : error ? error : isOccupied ? "Motion detected! The room is currently occupied." : "No motion detected. The room is available."
+                            children: loading ? "Connecting to motion sensor..." : error ? `Error: ${error}` : isOccupied ? "Motion detected! The room is currently occupied." : "No motion detected. The room is available."
                         }, void 0, false, {
                             fileName: "[project]/components/occupancy-status.tsx",
-                            lineNumber: 84,
+                            lineNumber: 94,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/occupancy-status.tsx",
-                    lineNumber: 61,
+                    lineNumber: 71,
                     columnNumber: 9
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/occupancy-status.tsx",
-                lineNumber: 60,
+                lineNumber: 70,
                 columnNumber: 7
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/occupancy-status.tsx",
-        lineNumber: 43,
+        lineNumber: 53,
         columnNumber: 5
     }, this);
 }

@@ -5,6 +5,9 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { MoveIcon as Motion, ActivitySquare } from "lucide-react"
 
+// Use environment variable or fallback to localhost for development
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000"
+
 export default function OccupancyStatus() {
   const [isOccupied, setIsOccupied] = useState(false)
   const [loading, setLoading] = useState(true)
@@ -13,17 +16,24 @@ export default function OccupancyStatus() {
   useEffect(() => {
     const checkMotion = async () => {
       try {
-        const response = await fetch("http://172.20.10.5:5000/motion")
+        const response = await fetch(`${BACKEND_URL}/motion`, {
+          method: 'GET',
+          headers: {
+            'Accept': 'application/json',
+          },
+        })
 
         if (!response.ok) {
-          throw new Error("Failed to fetch motion data")
+          throw new Error(`HTTP error! status: ${response.status}`)
         }
 
         const data = await response.json()
         setIsOccupied(data.motion)
         setLoading(false)
+        setError(null) // Clear any previous errors
       } catch (err) {
-        setError("Could not connect to motion sensor")
+        const errorMessage = err instanceof Error ? err.message : "Could not connect to motion sensor"
+        setError(errorMessage)
         setLoading(false)
         console.error("Error fetching motion data:", err)
       }
@@ -85,7 +95,7 @@ export default function OccupancyStatus() {
             {loading
               ? "Connecting to motion sensor..."
               : error
-                ? error
+                ? `Error: ${error}`
                 : isOccupied
                   ? "Motion detected! The room is currently occupied."
                   : "No motion detected. The room is available."}
