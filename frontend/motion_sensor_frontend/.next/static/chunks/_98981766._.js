@@ -210,7 +210,7 @@ var _s = __turbopack_context__.k.signature();
 ;
 ;
 // Use environment variable or fallback to localhost for development
-const BACKEND_URL = ("TURBOPACK compile-time value", "http://localhost:5000") || "http://localhost:5000";
+const BACKEND_URL = __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$build$2f$polyfills$2f$process$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"].env.NEXT_PUBLIC_BACKEND_URL || "http://172.20.10.5:5000";
 function OccupancyStatus() {
     _s();
     const [isOccupied, setIsOccupied] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$index$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["useState"])(false);

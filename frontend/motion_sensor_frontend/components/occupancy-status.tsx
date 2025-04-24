@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { MoveIcon as Motion, ActivitySquare } from "lucide-react"
 
 // Use environment variable or fallback to localhost for development
-const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://localhost:5000"
+const BACKEND_URL = process.env.NEXT_PUBLIC_BACKEND_URL || "http://172.20.10.5:5000"
 
 export default function OccupancyStatus() {
   const [isOccupied, setIsOccupied] = useState(false)
