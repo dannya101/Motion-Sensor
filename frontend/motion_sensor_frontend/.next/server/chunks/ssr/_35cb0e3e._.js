@@ -189,7 +189,7 @@ function OccupancyStatus() {
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useEffect"])(()=>{
         const checkMotion = async ()=>{
             try {
-                const response = await fetch(`${BACKEND_URL}/motion`, {
+                const response = await fetch(`http://172.20.10.5:5000/motion`, {
                     method: 'GET',
                     headers: {
                         'Accept': 'application/json'

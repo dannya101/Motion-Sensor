@@ -16,7 +16,7 @@ export default function OccupancyStatus() {
   useEffect(() => {
     const checkMotion = async () => {
       try {
-        const response = await fetch(`${BACKEND_URL}/motion`, {
+        const response = await fetch(`http://172.20.10.5:5000/motion`, {
           method: 'GET',
           headers: {
             'Accept': 'application/json',
